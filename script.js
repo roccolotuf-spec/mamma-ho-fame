@@ -1,5 +1,6 @@
-const menuData = [
-  // --- TRIS DI POLPETTE ---
+// Recupera i panini salvati nel localStorage (se non ce ne sono, usa una lista predefinita)
+const savedMenu = JSON.parse(localStorage.getItem('mieiPanini')) || [
+    // --- TRIS DI POLPETTE ---
   { categoria: "Tris di Polpette", nome: "POLPETTE CLASSICHE", prezzo: "€ 5,00", descrizione: "Polpette di vitello, maiale, melanzane e pollo." },
   // --- TAGLIERI ---
   { categoria: "Taglieri", nome: "TAGLIERE PICCOLO", prezzo: "€ 15,00", descrizione: "Salumi e formaggi selezionati del territorio." },
@@ -32,24 +33,32 @@ const menuData = [
   { categoria: "Friggitoria", nome: "DIPPERS", prezzo: "€ 4,00", descrizione: "Cheddar e bacon, Cacio e pepe, o Crema di pistacchio e mortadella." },
   { categoria: "Beverage", nome: "COCA COLA/FANTA", prezzo: "€ 2,00", descrizione: "Bottiglia 33cl." },
   { categoria: "Beverage", nome: "ESTATHE", prezzo: "€ 1,50", descrizione: "Pesca o limone." },
+
+    // Aggiungi qui gli altri che avevi prima...
 ];
 
-const container = document.getElementById("panini-list");
-
+// Ora aggiorniamo la funzione renderMenu per usare 'savedMenu'
 function renderMenu() {
-  if (!container) return;
-  container.innerHTML = menuData
-    .map((item) => `
-      <div class="card">
-        <span class="badge">${item.categoria}</span>
-        <h3>${item.nome}</h3>
-        <p class="price">${item.prezzo}</p>
-        <p class="descrizione">${item.descrizione}</p>
-      </div>
+    const container = document.getElementById('panini-list');
+    if (!container) return; // Se siamo nella home e il contenitore esiste, procedi
+    
+    container.innerHTML = savedMenu.map(item => `
+        <div class="card">
+            <h3>${item.nome}</h3>
+            <p class="price">${item.prezzo}</p>
+            <p class="descrizione">${item.descrizione}</p>
+        </div>
     `).join("");
 }
 
+// Chiamiamo la funzione
 renderMenu();
+
+
+
+
+
+
 
 // Gestione Bottone "Gira la ruota"
 document.getElementById('btn-play').addEventListener('click', () => {
