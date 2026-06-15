@@ -158,3 +158,9 @@ h2 {
     margin-top: 40px;
     color: #333;
 }
+h2 {
+    color: white; /* Cambia il colore dei titoli in bianco */
+    border-left: 5px solid #e67e22; /* Un tocco di arancione */
+    padding-left: 10px;
+    margin-top: 40px;
+}
