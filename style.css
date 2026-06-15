@@ -220,3 +220,13 @@ h2 {
     color: #ccc;
     margin-bottom: 10px;
 }
+/* Aggiunge spazio sotto l'header per non far toccare i piatti */
+header {
+    margin-bottom: 50px; 
+}
+
+/* Opzionale: Rendi il logo di Pongo più nitido */
+header img {
+    max-width: 150px;
+    height: auto;
+}
