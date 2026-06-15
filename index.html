@@ -17,4 +17,29 @@
   <footer class="footer">
   <p>La mascotte di Mamma Ho Fame: 🐾 Pongo!</p>
 </footer>
+<script>
+    function renderMenu() {
+        const container = document.getElementById('panini-list');
+        // Recuperiamo i dati dal 'database' locale
+        const savedMenu = JSON.parse(localStorage.getItem('mieiPanini')) || [];
+        
+        // Se la lista è vuota, mostriamo un messaggio
+        if (savedMenu.length === 0) {
+            container.innerHTML = "<p>Menù in aggiornamento, torna presto!</p>";
+            return;
+        }
+        
+        // Disegniamo le card basandoci sui dati salvati
+        container.innerHTML = savedMenu.map(item => `
+            <div class="card">
+                <h3>${item.nome}</h3>
+                <p class="price">${item.prezzo} €</p>
+                <p class="descrizione">${item.descrizione}</p>
+            </div>
+        `).join("");
+    }
+
+    // Eseguiamo la funzione appena la pagina viene caricata
+    renderMenu();
+</script>
 </div>
