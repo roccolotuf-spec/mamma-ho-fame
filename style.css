@@ -190,3 +190,33 @@ h2 {
     color: #4caf50; /* Verde per il prezzo */
     font-size: 1.2em;
 }
+/* Stile per il titolo e logo gestito sopra */
+
+/* Reset base per le card - niente più effetti strani */
+.card {
+    background-color: #222;
+    color: white;
+    padding: 20px;
+    margin: 10px;
+    border: 1px solid #444;
+    border-radius: 12px; /* Angoli leggermente più morbidi */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: none; /* Rimosso l'effetto hover che inseguiva */
+}
+
+/* Stile pulito per i titoli dei piatti dentro le card */
+.card h3 {
+    color: #ff9800;
+    margin-top: 0;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+}
+
+/* Stile per la descrizione */
+.card p {
+    font-size: 0.9rem;
+    color: #ccc;
+    margin-bottom: 10px;
+}
