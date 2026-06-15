@@ -4,39 +4,63 @@
     <meta charset="UTF-8">
     <title>Mamma Ho Fame</title>
     <style>
-        /* Qui dentro mettiamo tutto il tuo CSS */
-        body { font-family: sans-serif; text-align: center; }
-        .menu-cat { margin-bottom: 20px; }
-        .card { border: 1px solid #ccc; padding: 10px; margin: 5px; }
+        body { font-family: sans-serif; background: #222; color: white; text-align: center; padding: 20px; }
+        .card { border: 1px solid #ff9800; padding: 15px; margin: 10px auto; width: 80%; border-radius: 10px; background: #333; }
+        h1 { color: #ff9800; text-transform: uppercase; }
+        button { padding: 10px 20px; background: #ff9800; border: none; cursor: pointer; font-weight: bold; }
+        .menu-cat { margin-bottom: 30px; }
     </style>
 </head>
 <body>
     <header>
-        <h1 style="color: #ff9800;">MAMMA HO FAME</h1>
+        <h1>Mamma ho fame</h1>
     </header>
 
     <main id="menu-container">
+        <h2>Tris di Polpette</h2><div id="tris-di-polpette-list" class="menu-cat"></div>
+        <h2>Taglieri</h2><div id="taglieri-list" class="menu-cat"></div>
+        <h2>Dolci</h2><div id="dolci-list" class="menu-cat"></div>
         <h2>Burger</h2><div id="panini-list" class="menu-cat"></div>
+        <h2>Friggitoria</h2><div id="friggitoria-list" class="menu-cat"></div>
     </main>
 
-    <div id="sezione-gioco">
+    <div style="margin: 50px 0;">
         <button id="btn-play">Gira la ruota!</button>
         <p id="result-message"></p>
     </div>
 
     <script>
-        // Qui dentro mettiamo tutto il tuo JS
-        const menuPredefinito = [
-            { categoria: "Burger", nome: "MAMMA ROSA", prezzo: "€ 6,00", descrizione: "Hamburger 200g" }
+        const menu = [
+            { categoria: "Tris di Polpette", nome: "POLPETTE CLASSICHE", prezzo: "€ 5,00", descrizione: "Vitello, maiale, melanzane." },
+            { categoria: "Taglieri", nome: "TAGLIERE PICCOLO", prezzo: "€ 15,00", descrizione: "Salumi e formaggi locali." },
+            { categoria: "Dolci", nome: "BUBBLE WAFFLE", prezzo: "€ 4,00", descrizione: "Gelato e salse." },
+            { categoria: "Burger", nome: "MAMMA ROSA", prezzo: "€ 6,00", descrizione: "Hamburger 200g, cheddar." },
+            { categoria: "Burger", nome: "SMASH BURGER", prezzo: "€ 8,00", descrizione: "Doppio hamburger 100g." },
+            { categoria: "Friggitoria", nome: "DIPPERS", prezzo: "€ 4,00", descrizione: "Salse a scelta." }
         ];
 
         function render() {
-            const container = document.getElementById('panini-list');
-            container.innerHTML = menuPredefinito.map(i => `<div class="card"><h3>${i.nome}</h3></div>`).join("");
+            const categorie = [
+                { id: "tris-di-polpette-list", cat: "Tris di Polpette" },
+                { id: "taglieri-list", cat: "Taglieri" },
+                { id: "dolci-list", cat: "Dolci" },
+                { id: "panini-list", cat: "Burger" },
+                { id: "friggitoria-list", cat: "Friggitoria" }
+            ];
+            categorie.forEach(c => {
+                const container = document.getElementById(c.id);
+                const items = menu.filter(m => m.categoria === c.cat);
+                container.innerHTML = items.map(i => `
+                    <div class="card">
+                        <h3>${i.nome}</h3>
+                        <p>${i.prezzo} - ${i.descrizione}</p>
+                    </div>`).join("");
+            });
         }
 
         document.getElementById('btn-play').addEventListener('click', () => {
-            document.getElementById('result-message').innerText = "Test riuscito!";
+            const msg = document.getElementById('result-message');
+            msg.innerText = Math.random() < 0.2 ? "🎉 Hai vinto un omaggio!" : "Ritenta la fortuna!";
         });
 
         render();
