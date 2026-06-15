@@ -4,60 +4,51 @@
     <meta charset="UTF-8">
     <title>Mamma Ho Fame</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f4f4f4; color: #333; text-align: center; margin: 0; padding: 20px; }
-        header { padding: 20px 0; }
-        img { width: 120px; border-radius: 50%; }
-        h1 { color: #ff9800; text-transform: uppercase; margin-bottom: 20px; }
-        .menu-cat { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-bottom: 40px; }
-        .card { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .card h3 { color: #ff9800; margin: 0 0 10px 0; }
-        button { padding: 15px 30px; background: #ff9800; color: white; border: none; border-radius: 5px; font-size: 18px; cursor: pointer; transition: 0.3s; }
-        button:hover { background: #e68900; }
-        #result-message { font-size: 20px; font-weight: bold; margin-top: 15px; }
+        body { font-family: sans-serif; background-color: #f4f4f4; text-align: center; padding: 20px; }
+        .menu-cat { margin-bottom: 30px; }
+        .card { background: white; padding: 10px; margin: 5px auto; width: 300px; border: 1px solid #ddd; }
+        img { width: 120px; }
+        h1 { color: #ff9800; }
+        button { padding: 10px 20px; background: #ff9800; border: none; cursor: pointer; }
     </style>
 </head>
 <body>
-    <header>
-        <img src="https://raw.githubusercontent.com/roccolotuf-spec/mamma-ho-fame/main/pongo.png" alt="Pongo">
-        <h1>Mamma ho fame</h1>
-    </header>
+    <img src="https://raw.githubusercontent.com/roccolotuf-spec/mamma-ho-fame/main/pongo.png" alt="Pongo">
+    <h1>Mamma ho fame</h1>
 
-    <main id="menu-container">
-        <h2>Tris di Polpette</h2><div id="tris-di-polpette-list" class="menu-cat"></div>
-        <h2>Taglieri</h2><div id="taglieri-list" class="menu-cat"></div>
-        <h2>Burger</h2><div id="panini-list" class="menu-cat"></div>
-        <h2>Friggitoria</h2><div id="friggitoria-list" class="menu-cat"></div>
-    </main>
+    <h2>Tris di Polpette</h2><div id="tris-di-polpette-list" class="menu-cat"></div>
+    <h2>Taglieri</h2><div id="taglieri-list" class="menu-cat"></div>
+    <h2>Burger</h2><div id="panini-list" class="menu-cat"></div>
+    <h2>Friggitoria</h2><div id="friggitoria-list" class="menu-cat"></div>
 
-    <div style="margin: 50px 0;">
-        <button id="btn-play">Gira la ruota!</button>
-        <p id="result-message"></p>
-    </div>
+    <button id="btn-play">Gira la ruota!</button>
+    <p id="result-message"></p>
 
     <script>
         const menu = [
-            { cat: "Tris di Polpette", nome: "POLPETTE CLASSICHE", prezzo: "€ 5,00", desc: "Vitello, maiale e melanzane." },
-            { cat: "Taglieri", nome: "TAGLIERE TOP", prezzo: "€ 15,00", desc: "Salumi e formaggi selezionati." },
-            { cat: "Burger", nome: "MAMMA ROSA", prezzo: "€ 6,00", desc: "Hamburger 200g, cheddar." },
-            { cat: "Burger", nome: "SMASH BURGER", prezzo: "€ 8,00", desc: "Doppio burger, bacon croccante." },
-            { cat: "Friggitoria", nome: "DIPPERS", prezzo: "€ 4,00", desc: "Patate con salse artigianali." }
+            { cat: "Tris di Polpette", nome: "POLPETTE CLASSICHE", prezzo: "€ 5,00", desc: "Vitello e melanzane." },
+            { cat: "Taglieri", nome: "TAGLIERE TOP", prezzo: "€ 15,00", desc: "Salumi e formaggi." },
+            { cat: "Burger", nome: "MAMMA ROSA", prezzo: "€ 6,00", desc: "Hamburger 200g." },
+            { cat: "Friggitoria", nome: "DIPPERS", prezzo: "€ 4,00", desc: "Patate fritte." }
         ];
 
-        const categorie = ["Tris di Polpette", "Taglieri", "Burger", "Friggitoria"];
-        
-        categorie.forEach(c => {
-            const container = document.getElementById(c.toLowerCase().replace(" ","-") + "-list");
-            const items = menu.filter(m => m.cat === c);
-            container.innerHTML = items.map(i => `
-                <div class="card">
-                    <h3>${i.nome}</h3>
-                    <p><b>${i.prezzo}</b><br>${i.desc}</p>
-                </div>`).join("");
+        const map = {
+            "Tris di Polpette": "tris-di-polpette-list",
+            "Taglieri": "taglieri-list",
+            "Burger": "panini-list",
+            "Friggitoria": "friggitoria-list"
+        };
+
+        menu.forEach(item => {
+            const container = document.getElementById(map[item.cat]);
+            if(container) {
+                container.innerHTML += `<div class="card"><h3>${item.nome}</h3><p>${item.prezzo} - ${item.desc}</p></div>`;
+            }
         });
 
-        document.getElementById('btn-play').addEventListener('click', () => {
-            document.getElementById('result-message').innerText = Math.random() < 0.3 ? "🎉 Hai vinto! Sconto 10%!" : "Ritenta la fortuna!";
-        });
+        document.getElementById('btn-play').onclick = () => {
+            document.getElementById('result-message').innerText = "🎉 Hai vinto!";
+        };
     </script>
 </body>
 </html>
