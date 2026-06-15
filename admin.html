@@ -10,36 +10,42 @@
 </head>
 <body>
     <h1>Pannello Titolare</h1>
+    <!-- Form per aggiungere -->
     <input type="text" id="nome" placeholder="Nome Panino">
     <input type="text" id="prezzo" placeholder="Prezzo">
     <textarea id="descrizione" placeholder="Descrizione"></textarea>
     <button onclick="salvaPanino()">Salva Panino</button>
 
+    <hr>
+    <h2>Lista Panini Attuali</h2>
+    <div id="admin-list"></div>
+
     <script>
-   // Password di protezione
-const passwordCorretta = "MammaHoFame2026";
+        // ... (qui tieni la parte della password che avevamo fatto) ...
 
-// Chiediamo la password appena la pagina viene caricata
-const passwordInserita = prompt("Inserisci la password per accedere al pannello:");
+        function caricaLista() {
+            let lista = JSON.parse(localStorage.getItem('mieiPanini')) || [];
+            const container = document.getElementById('admin-list');
+            container.innerHTML = lista.map((item, index) => `
+                <div style="border-bottom: 1px solid #555; padding: 10px;">
+                    <strong>${item.nome}</strong> - ${item.prezzo}
+                    <button onclick="eliminaPanino(${index})" style="background:red; color:white;">Elimina</button>
+                </div>
+            `).join("");
+        }
 
-if (passwordInserita !== passwordCorretta) {
-    alert("Password errata! Accesso negato.");
-    window.location.href = "index.html"; // Ti rimanda alla home se sbagli
-}
+        function eliminaPanino(index) {
+            let lista = JSON.parse(localStorage.getItem('mieiPanini'));
+            lista.splice(index, 1); // Rimuove il panino dalla lista
+            localStorage.setItem('mieiPanini', JSON.stringify(lista));
+            caricaLista(); // Aggiorna la vista
+            alert("Panino rimosso!");
+        }
 
-function salvaPanino() {
-    const nuovoPanino = {
-        nome: document.getElementById('nome').value,
-        prezzo: document.getElementById('prezzo').value,
-        descrizione: document.getElementById('descrizione').value
-    };
-    
-    let lista = JSON.parse(localStorage.getItem('mieiPanini')) || [];
-    lista.push(nuovoPanino);
-    
-    localStorage.setItem('mieiPanini', JSON.stringify(lista));
-    alert("Panino aggiunto con successo!");
-}
+        // Carica la lista all'apertura
+        caricaLista();
+        
+        // ... (tieni anche la tua funzione salvaPanino esistente, ma aggiungi 'caricaLista()' alla fine)
     </script>
 </body>
 </html>
