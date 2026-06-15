@@ -237,3 +237,16 @@ header img {
     width: 120px;
     height: auto;
 }
+/* Stile pulito per il logo Pongo */
+header img[alt="Pongo"] {
+    display: block;
+    margin: 0 auto 10px auto; /* Centrato */
+    width: 120px; /* Dimensione adatta */
+    height: auto;
+    
+    /* Rimuove qualsiasi bordo o sfondo bianco */
+    background-color: transparent !important; 
+    border: none !important;
+    padding: 0;
+    mix-blend-mode: multiply; /* TRUCCO: Se l'immagine ha lo sfondo bianco, questo lo rende trasparente sul nero */
+}
