@@ -60,36 +60,23 @@ function renderMenu() {
 
 renderMenu();
 
-// Gira la ruota (tutto il resto del tuo codice sotto)
-document.getElementById('btn-play').addEventListener('click', () => {
-   // ... il resto del tuo codice originale ...
-});
-
-
-
-
-
-
-
-// Gestione Bottone "Gira la ruota"
+// Gestione UNICA del Bottone "Gira la ruota"
 document.getElementById('btn-play').addEventListener('click', () => {
     // 1. Chiediamo il nome all'utente
     const nomeUtente = prompt("Inserisci il tuo nome per tentare la fortuna:");
     
-    // Se l'utente clicca "Annulla", usciamo dalla funzione
+    // Se l'utente clicca "Annulla" o non scrive nulla, usciamo
     if (!nomeUtente) return;
 
-    // 2. Generiamo un numero casuale tra 0 e 1
-    // Se è minore di 0.2, significa che c'è una probabilità del 20% di vincere
+    // 2. Logica di vittoria (20% di probabilità)
     const probabilitàVittoria = Math.random(); 
-    
     const messaggio = document.getElementById('result-message');
     
     if (probabilitàVittoria < 0.2) {
         messaggio.innerText = `🎉 Complimenti ${nomeUtente}, hai vinto un omaggio! Mostra questo schermo alla cassa.`;
-        messaggio.style.color = "#ff8c00"; // Colore arancio per la vittoria
+        messaggio.style.color = "#ff8c00"; // Arancio
     } else {
         messaggio.innerText = `Mi dispiace ${nomeUtente}, questa volta non hai vinto. Ritenta la fortuna un'altra volta!`;
-        messaggio.style.color = "white"; // Colore bianco per il testo normale
+        messaggio.style.color = "white"; // Bianco
     }
 });
