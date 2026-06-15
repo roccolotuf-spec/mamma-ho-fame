@@ -40,19 +40,25 @@ const savedMenu = JSON.parse(localStorage.getItem('mieiPanini')) || [
 // Ora aggiorniamo la funzione renderMenu per usare 'savedMenu'
 function renderMenu() {
     const container = document.getElementById('panini-list');
-    if (!container) return; // Se siamo nella home e il contenitore esiste, procedi
+    if (!container) return;
+    
+    // Recuperiamo i dati
+    const savedMenu = JSON.parse(localStorage.getItem('mieiPanini')) || [];
+    
+    // Se non c'è nulla nel localStorage, mostriamo un messaggio o lasciamo vuoto
+    if (savedMenu.length === 0) {
+        container.innerHTML = "<p>Nessun panino disponibile al momento.</p>";
+        return;
+    }
     
     container.innerHTML = savedMenu.map(item => `
         <div class="card">
-            <h3>${item.nome}</h3>
-            <p class="price">${item.prezzo}</p>
-            <p class="descrizione">${item.descrizione}</p>
+            <h3>${item.nome || "Nome non disponibile"}</h3>
+            <p class="price">${item.prezzo || "Prezzo non disponibile"}</p>
+            <p class="descrizione">${item.descrizione || ""}</p>
         </div>
     `).join("");
 }
-
-// Chiamiamo la funzione
-renderMenu();
 
 
 
