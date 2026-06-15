@@ -230,3 +230,10 @@ header img {
     max-width: 150px;
     height: auto;
 }
+/* Stile per il logo Pongo */
+.logo-pongo {
+    display: block;
+    margin: 0 auto 10px auto; /* Centrato */
+    width: 120px;
+    height: auto;
+}
