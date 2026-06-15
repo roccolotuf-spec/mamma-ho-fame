@@ -16,21 +16,30 @@
     <button onclick="salvaPanino()">Salva Panino</button>
 
     <script>
-        function salvaPanino() {
-            const nuovoPanino = {
-                nome: document.getElementById('nome').value,
-                prezzo: document.getElementById('prezzo').value,
-                descrizione: document.getElementById('descrizione').value
-            };
-            
-            // Recuperiamo la lista esistente o creiamo un array vuoto
-            let lista = JSON.parse(localStorage.getItem('mieiPanini')) || [];
-            lista.push(nuovoPanino);
-            
-            // Salviamo nel localStorage
-            localStorage.setItem('mieiPanini', JSON.stringify(lista));
-            alert("Panino aggiunto!");
-        }
+   // Password di protezione
+const passwordCorretta = "MammaHoFame2026";
+
+// Chiediamo la password appena la pagina viene caricata
+const passwordInserita = prompt("Inserisci la password per accedere al pannello:");
+
+if (passwordInserita !== passwordCorretta) {
+    alert("Password errata! Accesso negato.");
+    window.location.href = "index.html"; // Ti rimanda alla home se sbagli
+}
+
+function salvaPanino() {
+    const nuovoPanino = {
+        nome: document.getElementById('nome').value,
+        prezzo: document.getElementById('prezzo').value,
+        descrizione: document.getElementById('descrizione').value
+    };
+    
+    let lista = JSON.parse(localStorage.getItem('mieiPanini')) || [];
+    lista.push(nuovoPanino);
+    
+    localStorage.setItem('mieiPanini', JSON.stringify(lista));
+    alert("Panino aggiunto con successo!");
+}
     </script>
 </body>
 </html>
