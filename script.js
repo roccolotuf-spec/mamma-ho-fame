@@ -42,25 +42,28 @@ function renderMenu() {
     const container = document.getElementById('panini-list');
     if (!container) return;
     
-    // Recuperiamo i dati
-   // Recupera SOLO ciò che è salvato nel localStorage
-// Se è vuoto, allora mostra una lista vuota (o quello che preferisci)
-const savedMenu = JSON.parse(localStorage.getItem('mieiPanini')) || [];
+    const savedMenu = JSON.parse(localStorage.getItem('mieiPanini')) || [];
     
-    // Se non c'è nulla nel localStorage, mostriamo un messaggio o lasciamo vuoto
     if (savedMenu.length === 0) {
-        container.innerHTML = "<p>Nessun panino disponibile al momento.</p>";
+        container.innerHTML = "<p>Nessun panino disponibile.</p>";
         return;
     }
     
     container.innerHTML = savedMenu.map(item => `
         <div class="card">
-            <h3>${item.nome || "Nome non disponibile"}</h3>
-            <p class="price">${item.prezzo || "Prezzo non disponibile"}</p>
+            <h3>${item.nome || ""}</h3>
+            <p class="price">${item.prezzo || ""}</p>
             <p class="descrizione">${item.descrizione || ""}</p>
         </div>
     `).join("");
 }
+
+renderMenu();
+
+// Gira la ruota (tutto il resto del tuo codice sotto)
+document.getElementById('btn-play').addEventListener('click', () => {
+   // ... il resto del tuo codice originale ...
+});
 
 
 
