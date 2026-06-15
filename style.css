@@ -164,3 +164,22 @@ h2 {
     padding-left: 10px;
     margin-top: 40px;
 }
+.card {
+    background-color: #222; /* Grigio scuro per contrasto */
+    color: white;           /* Testo bianco per essere visibile */
+    padding: 20px;
+    margin: 10px;
+    border-radius: 8px;
+    border: 1px solid #444;
+}
+
+.card h3 {
+    margin-top: 0;
+    color: #ff9800; /* Arancione per il titolo */
+}
+
+.price {
+    font-weight: bold;
+    color: #4caf50; /* Verde per il prezzo */
+    font-size: 1.2em;
+}
