@@ -3,32 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <title>Mamma Ho Fame</title>
-   <link rel="stylesheet" href="./style.css">
+    <style>
+        /* Qui dentro mettiamo tutto il tuo CSS */
+        body { font-family: sans-serif; text-align: center; }
+        .menu-cat { margin-bottom: 20px; }
+        .card { border: 1px solid #ccc; padding: 10px; margin: 5px; }
+    </style>
 </head>
 <body>
-    <header style="text-align: center; padding: 20px 0;">
-       <img src="./pongo.png" ...>
-        <h1 style="color: #ff9800; text-transform: uppercase;">Mamma ho fame</h1>
+    <header>
+        <h1 style="color: #ff9800;">MAMMA HO FAME</h1>
     </header>
 
     <main id="menu-container">
-        <h2>Tris di Polpette</h2><div id="tris-di-polpette-list" class="menu-cat"></div>
-        <h2>Taglieri</h2><div id="taglieri-list" class="menu-cat"></div>
-        <h2>Dolci</h2><div id="dolci-list" class="menu-cat"></div>
         <h2>Burger</h2><div id="panini-list" class="menu-cat"></div>
-        <h2>Piadine</h2><div id="piadine-list" class="menu-cat"></div>
-        <h2>Bao</h2><div id="bao-list" class="menu-cat"></div>
-        <h2>Special</h2><div id="special-list" class="menu-cat"></div>
-        <h2>Friggitoria</h2><div id="friggitoria-list" class="menu-cat"></div>
-        <h2>Beverage</h2><div id="beverage-list" class="menu-cat"></div>
     </main>
 
-    <div id="sezione-gioco" style="text-align: center; margin: 50px 0;">
-        <h2>Tenta la Fortuna</h2>
+    <div id="sezione-gioco">
         <button id="btn-play">Gira la ruota!</button>
         <p id="result-message"></p>
     </div>
 
-   <script src="./script.js"></script>
+    <script>
+        // Qui dentro mettiamo tutto il tuo JS
+        const menuPredefinito = [
+            { categoria: "Burger", nome: "MAMMA ROSA", prezzo: "€ 6,00", descrizione: "Hamburger 200g" }
+        ];
+
+        function render() {
+            const container = document.getElementById('panini-list');
+            container.innerHTML = menuPredefinito.map(i => `<div class="card"><h3>${i.nome}</h3></div>`).join("");
+        }
+
+        document.getElementById('btn-play').addEventListener('click', () => {
+            document.getElementById('result-message').innerText = "Test riuscito!";
+        });
+
+        render();
+    </script>
 </body>
 </html>
