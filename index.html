@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Mamma Ho Fame</title>
-    </head>
+</head>
 <body>
 
     <header class="hero">
@@ -14,39 +14,20 @@
         <img src="https://i.ibb.co/93grnZQr/d0a27311-1c75-4bb7-aa32-226df3a340c6.jpg" class="hero-image">
     </header>
 
-<div id="panini-list"></div>
+    <h2>Panini</h2>
+    <div id="panini-list" class="menu-cat"></div>
 
-<script>
-    function caricaEVisualizza() {
-        const container = document.getElementById('panini-list');
-        
-        // Recupera dal database locale
-        const datiSalvati = localStorage.getItem('mieiPanini');
-        
-        // Controllo di sicurezza
-        if (!datiSalvati) {
-            container.innerHTML = "<p>Nessun panino aggiunto.</p>";
-            return;
-        }
+    <h2>Dolci</h2>
+    <div id="dolci-list" class="menu-cat"></div>
 
-        try {
-            const lista = JSON.parse(datiSalvati);
-            container.innerHTML = lista.map(item => `
-                <div class="card" style="margin-bottom: 20px; border: 1px solid #ccc; padding: 10px;">
-                    <h3>${item.nome || "Senza Nome"}</h3>
-                    <p>Prezzo: ${item.prezzo || "0"} €</p>
-                    <p>Descrizione: ${item.descrizione || "Nessuna descrizione"}</p>
-                </div>
-            `).join("");
-        } catch (e) {
-            console.error("Errore nel leggere i dati:", e);
-            container.innerHTML = "<p>Errore nel caricamento del menù.</p>";
-        }
-    }
+    <h2>Taglieri</h2>
+    <div id="taglieri-list" class="menu-cat"></div>
 
-    // Forza il caricamento al momento giusto
-    window.onload = caricaEVisualizza;
-</script>
+    <h2>Polpette</h2>
+    <div id="polpette-list" class="menu-cat"></div>
+
+    <h2>Bao</h2>
+    <div id="bao-list" class="menu-cat"></div>
 
     <div id="game-section">
         <h2>Tenta la Fortuna</h2>
@@ -60,24 +41,36 @@
 
     <script>
         function renderMenu() {
-            const container = document.getElementById('panini-list');
-            const savedMenu = JSON.parse(localStorage.getItem('mieiPanini')) || [];
-            
-            if (savedMenu.length === 0) {
-                container.innerHTML = "<p>Menù in aggiornamento, torna presto!</p>";
-                return;
+            // Recupero dati
+            const listaCompleta = JSON.parse(localStorage.getItem('mieiPanini')) || [];
+
+            // Funzione motore per dividere i dati
+            function stampaCategoria(cat, idContenitore) {
+                const container = document.getElementById(idContenitore);
+                if (!container) return; 
+
+                const filtrati = listaCompleta.filter(item => item.categoria === cat);
+                
+                container.innerHTML = filtrati.length > 0 
+                    ? filtrati.map(item => `
+                        <div class="card">
+                            <h3>${item.nome}</h3>
+                            <p class="price">${item.prezzo} €</p>
+                            <p>${item.descrizione || ""}</p>
+                        </div>
+                    `).join("")
+                    : "<p>Nessun articolo in questa categoria.</p>";
             }
-            
-            container.innerHTML = savedMenu.map(item => `
-                <div class="card">
-                    <h3>${item.nome || "Panino"}</h3>
-                    <p class="price">${item.prezzo || "0"} €</p>
-                    <p class="descrizione">${item.descrizione || ""}</p>
-                </div>
-            `).join("");
+
+            // Smistamento su tutti i div creati sopra
+            stampaCategoria('Panini', 'panini-list');
+            stampaCategoria('Dolci', 'dolci-list');
+            stampaCategoria('Taglieri', 'taglieri-list');
+            stampaCategoria('Polpette', 'polpette-list');
+            stampaCategoria('Bao', 'bao-list');
         }
 
-        // Lancia la funzione
+        // Avvio unico
         renderMenu();
     </script>
 </body>

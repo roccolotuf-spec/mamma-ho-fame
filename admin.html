@@ -5,15 +5,24 @@
     <title>Area Admin - Mamma Ho Fame</title>
     <style>
         body { font-family: Arial; background: #222; color: white; padding: 20px; }
-        input, textarea { display: block; width: 100%; margin: 10px 0; padding: 10px; }
+        input, textarea, select { display: block; width: 100%; margin: 10px 0; padding: 10px; }
     </style>
 </head>
 <body>
     <h1>Pannello Titolare</h1>
-    <!-- Form per aggiungere -->
-    <input type="text" id="nome" placeholder="Nome Panino">
+    
+    <input type="text" id="nome" placeholder="Nome">
     <input type="text" id="prezzo" placeholder="Prezzo">
     <textarea id="descrizione" placeholder="Descrizione"></textarea>
+    
+    <select id="categoria">
+        <option value="Panini">Panini</option>
+        <option value="Dolci">Dolci</option>
+        <option value="Taglieri">Taglieri</option>
+        <option value="Polpette">Polpette</option>
+        <option value="Bao">Bao</option>
+    </select>
+    
     <button onclick="salvaPanino()">Salva Panino</button>
 
     <hr>
@@ -21,7 +30,6 @@
     <div id="admin-list"></div>
 
     <script>
-    // 1. Password
     const passwordCorretta = "MammaHoFame2026";
     const passwordInserita = prompt("Inserisci la password:");
     if (passwordInserita !== passwordCorretta) {
@@ -29,33 +37,33 @@
         window.location.href = "index.html";
     }
 
-    // 2. Funzione Carica (DEVE stare sopra quelle che la richiamano)
     function caricaLista() {
         let lista = JSON.parse(localStorage.getItem('mieiPanini')) || [];
         const container = document.getElementById('admin-list');
         container.innerHTML = lista.map((item, index) => `
             <div style="border-bottom: 1px solid #555; padding: 10px;">
-                <strong>${item.nome}</strong> - ${item.prezzo}
+                <strong>${item.nome}</strong> (${item.categoria}) - ${item.prezzo}
                 <button onclick="eliminaPanino(${index})">Elimina</button>
             </div>
         `).join("");
     }
 
-    // 3. Funzione Salva
     function salvaPanino() {
         const nuovoPanino = {
             nome: document.getElementById('nome').value,
             prezzo: document.getElementById('prezzo').value,
-            descrizione: document.getElementById('descrizione').value
+            descrizione: document.getElementById('descrizione').value,
+            categoria: document.getElementById('categoria').value
         };
+        
         let lista = JSON.parse(localStorage.getItem('mieiPanini')) || [];
         lista.push(nuovoPanino);
         localStorage.setItem('mieiPanini', JSON.stringify(lista));
+        
         alert("Panino salvato!");
-        caricaLista(); 
+        caricaLista();
     }
 
-    // 4. Funzione Elimina
     function eliminaPanino(index) {
         let lista = JSON.parse(localStorage.getItem('mieiPanini'));
         lista.splice(index, 1);
@@ -63,8 +71,7 @@
         caricaLista();
     }
 
-    // 5. Avvio
     caricaLista();
-</script>
+    </script>
 </body>
 </html>
