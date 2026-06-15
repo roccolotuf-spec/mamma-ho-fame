@@ -43,7 +43,9 @@ function renderMenu() {
     if (!container) return;
     
     // Recuperiamo i dati
-    const savedMenu = JSON.parse(localStorage.getItem('mieiPanini')) || [];
+   // Recupera SOLO ciò che è salvato nel localStorage
+// Se è vuoto, allora mostra una lista vuota (o quello che preferisci)
+const savedMenu = JSON.parse(localStorage.getItem('mieiPanini')) || [];
     
     // Se non c'è nulla nel localStorage, mostriamo un messaggio o lasciamo vuoto
     if (savedMenu.length === 0) {
