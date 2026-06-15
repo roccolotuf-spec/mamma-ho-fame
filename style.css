@@ -26,6 +26,13 @@ body {
   flex-direction: column;
   transition: transform 0.3s;
 }
+.card {
+    background-color: #222; /* Sfondo scuro */
+    color: white;           /* Testo bianco (questo lo renderà visibile!) */
+    padding: 15px;
+    margin: 10px;
+    border: 1px solid #444;
+}
 .card:hover {
   transform: translateY(-5px);
   border-color: #ff9900;
