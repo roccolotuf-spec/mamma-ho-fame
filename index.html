@@ -6,77 +6,59 @@
     <link rel="stylesheet" href="style.css"> 
 </head>
 <body>
+
     <header style="text-align: center; padding: 40px 0;">
-    <img src="pongo.png" alt="Pongo" style="width: 120px; margin-bottom: 10px;"> <h1 style="font-family: sans-serif; font-size: 2.5rem; color: #ff9800; margin: 0; text-transform: uppercase; letter-spacing: 2px;">
-        Mamma ho fame
-    </h1>
-</header>
-
-    <header class="hero">
-        <div class="hero-text">
-            
-        </div>
-        <img src="https://i.ibb.co/93grnZQr/d0a27311-1c75-4bb7-aa32-226df3a340c6.jpg" class="hero-image">
+        <img src="pongo.png" alt="Pongo" style="width: 150px; margin-bottom: 10px; display: block; margin-left: auto; margin-right: auto;">
+        <h1 style="font-family: sans-serif; font-size: 2.5rem; color: #ff9800; margin: 0; text-transform: uppercase; letter-spacing: 2px;">
+            Mamma ho fame
+        </h1>
     </header>
-<!-- 1. Tris di Polpette -->
-<h2>Tris di Polpette</h2>
-<div id="tris-di-polpette-list" class="menu-cat"></div>
 
-<!-- 2. Taglieri -->
-<h2>Taglieri</h2>
-<div id="taglieri-list" class="menu-cat"></div>
+    <main>
+        <h2>Tris di Polpette</h2>
+        <div id="tris-di-polpette-list" class="menu-cat"></div>
 
-<!-- 3. Dolci -->
-<h2>Dolci</h2>
-<div id="dolci-list" class="menu-cat"></div>
+        <h2>Taglieri</h2>
+        <div id="taglieri-list" class="menu-cat"></div>
 
-<!-- 4. Burger (Ex Panini) -->
-<h2>Burger</h2>
-<div id="panini-list" class="menu-cat"></div>
+        <h2>Dolci</h2>
+        <div id="dolci-list" class="menu-cat"></div>
 
-<!-- 5. Piadine -->
-<h2>Piadine</h2>
-<div id="piadine-list" class="menu-cat"></div>
+        <h2>Burger</h2>
+        <div id="panini-list" class="menu-cat"></div>
 
-<!-- 6. Bao -->
-<h2>Bao</h2>
-<div id="bao-list" class="menu-cat"></div>
+        <h2>Piadine</h2>
+        <div id="piadine-list" class="menu-cat"></div>
 
-<!-- 7. Special -->
-<h2>Special</h2>
-<div id="special-list" class="menu-cat"></div>
+        <h2>Bao</h2>
+        <div id="bao-list" class="menu-cat"></div>
 
-<!-- 8. Friggitoria -->
-<h2>Friggitoria</h2>
-<div id="friggitoria-list" class="menu-cat"></div>
+        <h2>Special</h2>
+        <div id="special-list" class="menu-cat"></div>
 
-<!-- 9. Beverage -->
-<h2>Beverage</h2>
-<div id="beverage-list" class="menu-cat"></div>
-   
+        <h2>Friggitoria</h2>
+        <div id="friggitoria-list" class="menu-cat"></div>
 
-    <div id="game-section">
-        <h2>Tenta la Fortuna</h2>
-        <button id="btn-play">Gira la ruota!</button>
-        <p id="result-message"></p>
+        <h2>Beverage</h2>
+        <div id="beverage-list" class="menu-cat"></div>
+    </main>
+
+    <div id="sezione-gioco" style="text-align: center; margin-top: 50px; padding: 25px; border-top: 1px solid #444; background-color: #1a1a1a;">
+        <h2 style="color: #ff9800; font-size: 2rem; margin-bottom: 20px;">Tenta la Fortuna</h2>
+        <button id="btn-play" style="padding: 15px 30px; background-color: #ff9800; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 18px; color: #121212;">
+            Gira la ruota!
+        </button>
+        <p id="result-message" style="margin-top: 20px; font-size: 1.4rem; font-weight: bold; color: white;"></p>
     </div>
 
-    <footer class="footer">
-        
-    </footer>
-
     <script>
+        // 1. Render Menu
         function renderMenu() {
-            // Recupero dati
             const listaCompleta = JSON.parse(localStorage.getItem('mieiPanini')) || [];
-
-            // Funzione motore per dividere i dati
             function stampaCategoria(cat, idContenitore) {
                 const container = document.getElementById(idContenitore);
                 if (!container) return; 
-
                 const filtrati = listaCompleta.filter(item => item.categoria === cat);
-                
                 container.innerHTML = filtrati.length > 0 
                     ? filtrati.map(item => `
                         <div class="card">
@@ -87,32 +69,32 @@
                     `).join("")
                     : "<p>Nessun articolo in questa categoria.</p>";
             }
-
-            // Smistamento su tutti i div creati sopra
-           // Smistamento su tutti i div creati sopra
-// I valori tra le prime virgolette DEVONO coincidere con i 'value' del tuo select Admin
-stampaCategoria('panini', 'panini-list');
-stampaCategoria('dolci', 'dolci-list');
-stampaCategoria('taglieri', 'taglieri-list');
-stampaCategoria('tris-di-polpette', 'tris-di-polpette-list');
-stampaCategoria('bao', 'bao-list');
-stampaCategoria('piadine', 'piadine-list');
-stampaCategoria('special', 'special-list');
-stampaCategoria('friggitoria', 'friggitoria-list');
-stampaCategoria('beverage', 'beverage-list');
+            stampaCategoria('panini', 'panini-list');
+            stampaCategoria('dolci', 'dolci-list');
+            stampaCategoria('taglieri', 'taglieri-list');
+            stampaCategoria('tris-di-polpette', 'tris-di-polpette-list');
+            stampaCategoria('bao', 'bao-list');
+            stampaCategoria('piadine', 'piadine-list');
+            stampaCategoria('special', 'special-list');
+            stampaCategoria('friggitoria', 'friggitoria-list');
+            stampaCategoria('beverage', 'beverage-list');
         }
 
-        // Avvio unico
+        // 2. Logica Ruota
+        document.getElementById('btn-play').addEventListener('click', () => {
+            const nomeUtente = prompt("Inserisci il tuo nome:");
+            if (!nomeUtente) return;
+            const messaggio = document.getElementById('result-message');
+            if (Math.random() < 0.2) {
+                messaggio.innerText = `🎉 Complimenti ${nomeUtente}, hai vinto un omaggio!`;
+                messaggio.style.color = "#ff9800";
+            } else {
+                messaggio.innerText = `Mi dispiace ${nomeUtente}, ritenta la fortuna!`;
+                messaggio.style.color = "white";
+            }
+        });
+
         renderMenu();
     </script>
-<div id="sezione-gioco" style="text-align: center; margin-top: 50px; padding: 25px; border-top: 1px solid #444; background-color: #1a1a1a;">
-    <h2 style="color: #ff9800; font-size: 2rem; margin-bottom: 20px;">Tenta la Fortuna</h2>
-    
-    <button id="btn-play" style="padding: 15px 30px; background-color: #ff9800; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 18px; color: #121212; transition: transform 0.2s;">
-        Gira la ruota!
-    </button>
-    
-    <p id="result-message" style="margin-top: 20px; font-size: 1.4rem; font-weight: bold; min-height: 1.6em; color: white;"></p>
-</div>
 </body>
 </html>

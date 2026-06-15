@@ -250,3 +250,10 @@ header img[alt="Pongo"] {
     padding: 0;
     mix-blend-mode: multiply; /* TRUCCO: Se l'immagine ha lo sfondo bianco, questo lo rende trasparente sul nero */
 }
+/* Forza la pulizia del logo */
+header img[src*="pongo"] {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+}
