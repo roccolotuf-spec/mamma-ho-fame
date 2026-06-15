@@ -21,31 +21,53 @@
     <div id="admin-list"></div>
 
     <script>
-        // ... (qui tieni la parte della password che avevamo fatto) ...
+       // Password di protezione
+const passwordCorretta = "MammaHoFame2026";
+const passwordInserita = prompt("Inserisci la password per accedere al pannello:");
 
-        function caricaLista() {
-            let lista = JSON.parse(localStorage.getItem('mieiPanini')) || [];
-            const container = document.getElementById('admin-list');
-            container.innerHTML = lista.map((item, index) => `
-                <div style="border-bottom: 1px solid #555; padding: 10px;">
-                    <strong>${item.nome}</strong> - ${item.prezzo}
-                    <button onclick="eliminaPanino(${index})" style="background:red; color:white;">Elimina</button>
-                </div>
-            `).join("");
-        }
+if (passwordInserita !== passwordCorretta) {
+    alert("Password errata!");
+    window.location.href = "index.html";
+}
 
-        function eliminaPanino(index) {
-            let lista = JSON.parse(localStorage.getItem('mieiPanini'));
-            lista.splice(index, 1); // Rimuove il panino dalla lista
-            localStorage.setItem('mieiPanini', JSON.stringify(lista));
-            caricaLista(); // Aggiorna la vista
-            alert("Panino rimosso!");
-        }
+// Funzione Salva
+function salvaPanino() {
+    const nuovoPanino = {
+        nome: document.getElementById('nome').value,
+        prezzo: document.getElementById('prezzo').value,
+        descrizione: document.getElementById('descrizione').value
+    };
+    
+    let lista = JSON.parse(localStorage.getItem('mieiPanini')) || [];
+    lista.push(nuovoPanino);
+    localStorage.setItem('mieiPanini', JSON.stringify(lista));
+    alert("Panino aggiunto!");
+    caricaLista();
+}
 
-        // Carica la lista all'apertura
-        caricaLista();
-        
-        // ... (tieni anche la tua funzione salvaPanino esistente, ma aggiungi 'caricaLista()' alla fine)
+// Funzione Carica Lista
+function caricaLista() {
+    let lista = JSON.parse(localStorage.getItem('mieiPanini')) || [];
+    const container = document.getElementById('admin-list');
+    
+    container.innerHTML = lista.map((item, index) => `
+        <div style="border-bottom: 1px solid #555; padding: 10px;">
+            <strong>${item.nome}</strong> - ${item.prezzo}
+            <button onclick="eliminaPanino(${index})" style="background:red; color:white;">Elimina</button>
+        </div>
+    `).join("");
+}
+
+// Funzione Elimina
+function eliminaPanino(index) {
+    let lista = JSON.parse(localStorage.getItem('mieiPanini'));
+    lista.splice(index, 1);
+    localStorage.setItem('mieiPanini', JSON.stringify(lista));
+    caricaLista();
+}
+
+// Carica la lista all'apertura
+caricaLista();
     </script>
 </body>
 </html>
