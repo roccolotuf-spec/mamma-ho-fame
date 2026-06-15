@@ -1,45 +1,52 @@
-<header class="hero">
-  <div class="hero-text">
-    <h1>Mamma Ho Fame</h1>
-    <p>Il gusto che ti insegue!</p>
-  </div>
-  <img src="https://i.ibb.co/93grnZQr/d0a27311-1c75-4bb7-aa32-226df3a340c6.jpg" class="hero-image">
-</header>
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Mamma Ho Fame</title>
+    </head>
+<body>
 
-<div id="panini-list"></div>
+    <header class="hero">
+        <div class="hero-text">
+            <h1>Mamma Ho Fame</h1>
+            <p>Il gusto che ti insegue!</p>
+        </div>
+        <img src="https://i.ibb.co/93grnZQr/d0a27311-1c75-4bb7-aa32-226df3a340c6.jpg" class="hero-image">
+    </header>
 
-  <!-- Area Gioco -->
-  <div id="game-section">
-    <h2>Tenta la Fortuna</h2>
-    <button id="btn-play">Gira la ruota!</button>
-    <p id="result-message"></p>
-  </div>
-  <footer class="footer">
-  <p>La mascotte di Mamma Ho Fame: 🐾 Pongo!</p>
-</footer>
-<script>
-    function renderMenu() {
-        const container = document.getElementById('panini-list');
-        // Recuperiamo i dati dal 'database' locale
-        const savedMenu = JSON.parse(localStorage.getItem('mieiPanini')) || [];
-        
-        // Se la lista è vuota, mostriamo un messaggio
-        if (savedMenu.length === 0) {
-            container.innerHTML = "<p>Menù in aggiornamento, torna presto!</p>";
-            return;
+    <div id="panini-list"></div>
+
+    <div id="game-section">
+        <h2>Tenta la Fortuna</h2>
+        <button id="btn-play">Gira la ruota!</button>
+        <p id="result-message"></p>
+    </div>
+
+    <footer class="footer">
+        <p>La mascotte di Mamma Ho Fame: 🐾 Pongo!</p>
+    </footer>
+
+    <script>
+        function renderMenu() {
+            const container = document.getElementById('panini-list');
+            const savedMenu = JSON.parse(localStorage.getItem('mieiPanini')) || [];
+            
+            if (savedMenu.length === 0) {
+                container.innerHTML = "<p>Menù in aggiornamento, torna presto!</p>";
+                return;
+            }
+            
+            container.innerHTML = savedMenu.map(item => `
+                <div class="card">
+                    <h3>${item.nome || "Panino"}</h3>
+                    <p class="price">${item.prezzo || "0"} €</p>
+                    <p class="descrizione">${item.descrizione || ""}</p>
+                </div>
+            `).join("");
         }
-        
-        // Disegniamo le card basandoci sui dati salvati
-        container.innerHTML = savedMenu.map(item => `
-            <div class="card">
-                <h3>${item.nome}</h3>
-                <p class="price">${item.prezzo} €</p>
-                <p class="descrizione">${item.descrizione}</p>
-            </div>
-        `).join("");
-    }
 
-    // Eseguiamo la funzione appena la pagina viene caricata
-    renderMenu();
-</script>
-</div>
+        // Lancia la funzione
+        renderMenu();
+    </script>
+</body>
+</html>
