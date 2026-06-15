@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Area Admin - Mamma Ho Fame</title>
+    <style>
+        body { font-family: Arial; background: #222; color: white; padding: 20px; }
+        input, textarea { display: block; width: 100%; margin: 10px 0; padding: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Pannello Titolare</h1>
+    <input type="text" id="nome" placeholder="Nome Panino">
+    <input type="text" id="prezzo" placeholder="Prezzo">
+    <textarea id="descrizione" placeholder="Descrizione"></textarea>
+    <button onclick="salvaPanino()">Salva Panino</button>
+
+    <script>
+        function salvaPanino() {
+            const nuovoPanino = {
+                nome: document.getElementById('nome').value,
+                prezzo: document.getElementById('prezzo').value,
+                descrizione: document.getElementById('descrizione').value
+            };
+            
+            // Recuperiamo la lista esistente o creiamo un array vuoto
+            let lista = JSON.parse(localStorage.getItem('mieiPanini')) || [];
+            lista.push(nuovoPanino);
+            
+            // Salviamo nel localStorage
+            localStorage.setItem('mieiPanini', JSON.stringify(lista));
+            alert("Panino aggiunto!");
+        }
+    </script>
+</body>
+</html>
