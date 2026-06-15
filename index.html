@@ -14,7 +14,39 @@
         <img src="https://i.ibb.co/93grnZQr/d0a27311-1c75-4bb7-aa32-226df3a340c6.jpg" class="hero-image">
     </header>
 
-    <div id="panini-list"></div>
+<div id="panini-list"></div>
+
+<script>
+    function caricaEVisualizza() {
+        const container = document.getElementById('panini-list');
+        
+        // Recupera dal database locale
+        const datiSalvati = localStorage.getItem('mieiPanini');
+        
+        // Controllo di sicurezza
+        if (!datiSalvati) {
+            container.innerHTML = "<p>Nessun panino aggiunto.</p>";
+            return;
+        }
+
+        try {
+            const lista = JSON.parse(datiSalvati);
+            container.innerHTML = lista.map(item => `
+                <div class="card" style="margin-bottom: 20px; border: 1px solid #ccc; padding: 10px;">
+                    <h3>${item.nome || "Senza Nome"}</h3>
+                    <p>Prezzo: ${item.prezzo || "0"} €</p>
+                    <p>Descrizione: ${item.descrizione || "Nessuna descrizione"}</p>
+                </div>
+            `).join("");
+        } catch (e) {
+            console.error("Errore nel leggere i dati:", e);
+            container.innerHTML = "<p>Errore nel caricamento del menù.</p>";
+        }
+    }
+
+    // Forza il caricamento al momento giusto
+    window.onload = caricaEVisualizza;
+</script>
 
     <div id="game-section">
         <h2>Tenta la Fortuna</h2>
