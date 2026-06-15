@@ -7,13 +7,10 @@
         body { font-family: sans-serif; background-color: #f4f4f4; text-align: center; padding: 20px; }
         .menu-cat { margin-bottom: 30px; }
         .card { background: white; padding: 10px; margin: 5px auto; width: 300px; border: 1px solid #ddd; }
-        img { width: 120px; }
         h1 { color: #ff9800; }
-        button { padding: 10px 20px; background: #ff9800; border: none; cursor: pointer; }
     </style>
 </head>
 <body>
-    <img src="https://raw.githubusercontent.com/roccolotuf-spec/mamma-ho-fame/main/pongo.png" alt="Pongo">
     <h1>Mamma ho fame</h1>
 
     <h2>Tris di Polpette</h2><div id="tris-di-polpette-list" class="menu-cat"></div>
@@ -21,33 +18,29 @@
     <h2>Burger</h2><div id="panini-list" class="menu-cat"></div>
     <h2>Friggitoria</h2><div id="friggitoria-list" class="menu-cat"></div>
 
-    <button id="btn-play">Gira la ruota!</button>
-    <p id="result-message"></p>
-
     <script>
-        const menu = [
-            { cat: "Tris di Polpette", nome: "POLPETTE CLASSICHE", prezzo: "€ 5,00", desc: "Vitello e melanzane." },
-            { cat: "Taglieri", nome: "TAGLIERE TOP", prezzo: "€ 15,00", desc: "Salumi e formaggi." },
-            { cat: "Burger", nome: "MAMMA ROSA", prezzo: "€ 6,00", desc: "Hamburger 200g." },
-            { cat: "Friggitoria", nome: "DIPPERS", prezzo: "€ 4,00", desc: "Patate fritte." }
-        ];
+        // Mettiamo il codice in una funzione che parte solo quando tutto è pronto
+        window.onload = function() {
+            const menu = [
+                { cat: "Tris di Polpette", nome: "POLPETTE CLASSICHE", prezzo: "€ 5,00" },
+                { cat: "Taglieri", nome: "TAGLIERE TOP", prezzo: "€ 15,00" },
+                { cat: "Burger", nome: "MAMMA ROSA", prezzo: "€ 6,00" },
+                { cat: "Friggitoria", nome: "DIPPERS", prezzo: "€ 4,00" }
+            ];
 
-        const map = {
-            "Tris di Polpette": "tris-di-polpette-list",
-            "Taglieri": "taglieri-list",
-            "Burger": "panini-list",
-            "Friggitoria": "friggitoria-list"
-        };
+            const map = {
+                "Tris di Polpette": "tris-di-polpette-list",
+                "Taglieri": "taglieri-list",
+                "Burger": "panini-list",
+                "Friggitoria": "friggitoria-list"
+            };
 
-        menu.forEach(item => {
-            const container = document.getElementById(map[item.cat]);
-            if(container) {
-                container.innerHTML += `<div class="card"><h3>${item.nome}</h3><p>${item.prezzo} - ${item.desc}</p></div>`;
-            }
-        });
-
-        document.getElementById('btn-play').onclick = () => {
-            document.getElementById('result-message').innerText = "🎉 Hai vinto!";
+            menu.forEach(item => {
+                const container = document.getElementById(map[item.cat]);
+                if(container) {
+                    container.innerHTML += `<div class="card"><h3>${item.nome}</h3><p>${item.prezzo}</p></div>`;
+                }
+            });
         };
     </script>
 </body>
