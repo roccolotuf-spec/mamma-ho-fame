@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin - Mamma Ho Fame</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="admin-page">
+    <div class="admin-card password-box" id="loginBox">
+      <h1>Accesso Admin</h1>
+      <div class="admin-form">
+        <input type="password" id="adminPassword" placeholder="Inserisci password admin" />
+        <button class="login-btn" id="loginBtn">Accedi</button>
+      </div>
+    </div>
+
+    <div id="adminPanel" class="hidden">
+      <div class="admin-card">
+        <h1>Gestione Menu</h1>
+        <p>Da qui puoi modificare prezzi, prodotti, password admin e sezioni del menu.</p>
+        <button class="logout-btn" id="logoutBtn">Esci</button>
+      </div>
+
+      <div class="admin-card">
+        <h2>Cambia Password Admin</h2>
+        <div class="admin-form">
+          <input type="text" id="newPassword" placeholder="Nuova password" />
+          <button class="save-btn" id="changePasswordBtn">Salva nuova password</button>
+        </div>
+      </div>
+
+      <div class="admin-card">
+        <h2>Aggiungi prodotto</h2>
+        <div class="admin-form">
+          <select id="sectionSelect"></select>
+          <input type="text" id="itemName" placeholder="Nome prodotto" />
+          <input type="text" id="itemPrice" placeholder="Prezzo es. € 8,00" />
+          <textarea id="itemDescription" placeholder="Descrizione prodotto"></textarea>
+          <button class="add-btn" id="addItemBtn">Aggiungi prodotto</button>
+        </div>
+      </div>
+
+      <div class="admin-card">
+        <h2>Modifica prodotti</h2>
+        <div id="adminProducts" class="admin-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

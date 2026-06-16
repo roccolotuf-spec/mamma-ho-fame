@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mamma Ho Fame</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-top">
+      <img src="assets/panino-header.png" alt="Panino Mamma Ho Fame" class="hero-burger" />
+    </div>
+
+    <div class="brand-wrap">
+      <img src="assets/pongo.png" alt="Pongo" class="pongo-img" />
+      <img src="assets/logo.png" alt="Logo Mamma Ho Fame" class="logo-img" />
+      <h1>MAMMA HO FAME</h1>
+      <p class="subtitle">Street food, burger, dolci e sfizi</p>
+    </div>
+  </header>
+
+  <nav class="top-nav">
+    <a href="#tris">Tris di Polpette</a>
+    <a href="#taglieri">Taglieri</a>
+    <a href="#dolci">Dolci</a>
+    <a href="#burger">Burger</a>
+    <a href="#piadine">Piadine</a>
+    <a href="#bao">Bao</a>
+    <a href="#special">Special</a>
+    <a href="#friggitoria">Friggitoria</a>
+    <a href="#beverage">Beverage</a>
+    <a href="#game">Gira la Ruota</a>
+  </nav>
+
+  <main id="menu-container"></main>
+
+  <section id="game" class="menu-section game-section">
+    <h2>Gira la Ruota</h2>
+    <p>Prova a vincere una bibita omaggio, un panino omaggio oppure ritenta.</p>
+
+    <div class="wheel-card">
+      <div class="wheel-area">
+        <div class="pointer"></div>
+        <div class="wheel" id="wheel">
+          <div class="wheel-label label-1">Bibita</div>
+          <div class="wheel-label label-2">Riprova</div>
+          <div class="wheel-label label-3">Panino</div>
+          <div class="wheel-label label-4">Riprova</div>
+        </div>
+      </div>
+
+      <button id="spinBtn" class="spin-btn">Gira la ruota</button>
+      <p id="gameResult" class="game-result"></p>
+      <div class="prob-box">
+        <strong>Probabilità:</strong>
+        <span>50% ritenta - 25% bibita - 25% panino</span>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>&copy; Mamma Ho Fame</p>
+    <a href="admin.html">Area Admin</a>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
