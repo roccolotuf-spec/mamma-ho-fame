@@ -9,7 +9,7 @@
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; max-width: 1000px; margin: auto; }
         .card { background: #262626; padding: 20px; border-radius: 15px; border: 1px solid #ff9800; }
         h1 { font-size: 3em; margin-bottom: 20px; }
-        h2 { border-bottom: 2px solid #ff9800; display: inline-block; padding: 0 20px; }
+        h2 { border-bottom: 2px solid #ff9800; display: inline-block; padding: 0 20px; color: #fff; }
         button { padding: 15px 30px; background: #ff9800; border: none; border-radius: 10px; color: white; font-weight: bold; cursor: pointer; font-size: 1.2em; }
     </style>
 </head>
@@ -23,26 +23,31 @@
     </div>
 
     <script>
+        // HO INSERITO TUTTI I TUOI DATI QUI
         const menu = [
-            { cat: "Panini", nome: "MAMMA ROSA", prezzo: "€ 6,00", desc: "Hamburger 200g, cheddar, insalata." },
-            { cat: "Friggitoria", nome: "ALETTE DI POLLO", prezzo: "€ 2,00", desc: "Patatine con buccia." },
-            { cat: "Dolci", nome: "YOGURT YOGURT", prezzo: "€ 1,00", desc: "Pratine di yogurt." }
+            { cat: "Tris di Polpette", nome: "POLPETTE CLASSICHE", prezzo: "€ 5,00", desc: "Vitello, maiale, melanzane e pollo." },
+            { cat: "Taglieri", nome: "TAGLIERE TOP", prezzo: "€ 15,00", desc: "Salumi e formaggi selezionati." },
+            { cat: "Burger", nome: "MAMMA ROSA", prezzo: "€ 6,00", desc: "Hamburger 200g, cheddar, insalata." },
+            { cat: "Burger", nome: "SMASH BURGER", prezzo: "€ 8,00", desc: "Doppio hamburger 100g, bacon." },
+            { cat: "Friggitoria", nome: "DIPPERS", prezzo: "€ 4,00", desc: "Patate con cheddar e bacon." },
+            { cat: "Friggitoria", nome: "ALETTE DI POLLO", prezzo: "€ 2,00", desc: "Alette croccanti." },
+            { cat: "Dolci", nome: "BUBBLE WAFFLE", prezzo: "€ 4,00", desc: "Gelato e salse a scelta." }
         ];
 
-        const categorie = ["Panini", "Friggitoria", "Dolci"];
+        const categorie = ["Tris di Polpette", "Taglieri", "Burger", "Friggitoria", "Dolci"];
         const menuDiv = document.getElementById('menu');
 
         categorie.forEach(c => {
-            menuDiv.innerHTML += `<div class="menu-section"><h2>${c}</h2><div class="grid" id="${c}"></div></div>`;
+            menuDiv.innerHTML += `<div class="menu-section"><h2>${c}</h2><div class="grid" id="${c.replace(/ /g, '_')}"></div></div>`;
             const items = menu.filter(i => i.cat === c);
-            const grid = document.getElementById(c);
+            const grid = document.getElementById(c.replace(/ /g, '_'));
             items.forEach(i => {
-                grid.innerHTML += `<div class="card"><h3>${i.nome}</h3><p>${i.prezzo}</p><p>${i.desc}</p></div>`;
+                grid.innerHTML += `<div class="card"><h3>${i.nome}</h3><p><b>${i.prezzo}</b></p><p>${i.desc}</p></div>`;
             });
         });
 
         document.getElementById('btn-play').onclick = () => {
-            document.getElementById('result-message').innerText = Math.random() < 0.5 ? "🎉 VINTO!" : "RITENTA!";
+            document.getElementById('result-message').innerText = Math.random() < 0.5 ? "🎉 HAI VINTO!" : "RITENTA!";
         };
     </script>
 </body>
