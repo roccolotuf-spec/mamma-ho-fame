@@ -2,50 +2,58 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>Mamma Ho Fame</title>
+    <title>Menu Mamma Ho Fame</title>
     <style>
-        body { background-color: #1a1a1a; color: #ff9800; font-family: 'Segoe UI', sans-serif; text-align: center; margin: 0; padding: 20px; }
-        h1 { font-size: 2em; margin-bottom: 30px; }
-        h2 { color: #fff; margin: 40px 0 20px 0; border-bottom: 2px solid #ff9800; display: inline-block; padding: 0 10px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; max-width: 1000px; margin: 0 auto; }
+        body { background-color: #1a1a1a; color: #ff9800; font-family: sans-serif; text-align: center; padding: 20px; }
+        h1 { font-size: 2.5em; margin-bottom: 30px; }
+        h2 { color: #fff; margin-top: 40px; border-bottom: 2px solid #ff9800; display: inline-block; padding: 0 10px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; max-width: 1000px; margin: 20px auto; }
         .card { background: #262626; padding: 15px; border-radius: 10px; border: 1px solid #444; }
-        .nome { color: #fff; font-weight: bold; font-size: 1.1em; }
-        .prezzo { color: #ff9800; margin: 5px 0; font-weight: bold; }
-        .desc { font-size: 0.85em; color: #aaa; }
-        button { background: #ff9800; color: #fff; border: none; padding: 15px 30px; border-radius: 20px; font-weight: bold; cursor: pointer; margin-top: 50px; }
+        .nome { color: #fff; font-weight: bold; }
+        .prezzo { font-weight: bold; margin: 5px 0; }
+        .desc { font-size: 0.8em; color: #aaa; }
     </style>
 </head>
 <body>
-
     <h1>MAMMA HO FAME</h1>
-    <div id="menu-container"></div>
-    <button id="btn-play">Gira la ruota!</button>
-    <p id="result" style="margin-top:20px;"></p>
+    <div id="menu"></div>
 
     <script>
-        const menu = [
+        const menuData = [
             { cat: "Tris di Polpette", nome: "POLPETTE CLASSICHE", prezzo: "€ 5,00", desc: "Vitello, maiale, melanzane e pollo" },
             { cat: "Taglieri", nome: "TAGLIERE PICCOLO", prezzo: "€ 15,00", desc: "Salumi e formaggio" },
             { cat: "Taglieri", nome: "TAGLIERE MEDIO", prezzo: "€ 22,00", desc: "Salumi e formaggio" },
             { cat: "Taglieri", nome: "TAGLIERE GRANDE", prezzo: "€ 28,00", desc: "Salumi, formaggio e fritti" },
             { cat: "Burger", nome: "MAMMA ROSA", prezzo: "€ 6,00", desc: "Hamburger 200g, cheddar, insalata, pomodoro" },
-            { cat: "Burger", nome: "MAMMA ANGELA", prezzo: "€ 8,00", desc: "Pollo impanato, stracciatella, salsa cesar, bacon" },
-            { cat: "Burger", nome: "TARANTARSIA", prezzo: "€ 7,00", desc: "Salsiccia, friggitelli, caciocavallo, cipolla, maio pepe nero" },
-            { cat: "Special", nome: "CALABROSMASH", prezzo: "€ 9,00", desc: "Smash, caciocavallo, bacon, cipolla caramellata, maio all'nduja" },
-            { cat: "Special", nome: "PANINI CINESI", prezzo: "€ 2,50", desc: "3 pezzi con salsa a scelta (latte cond., Nutella, pistacchio)" },
+            { cat: "Burger", nome: "MAMMA ANGELA", prezzo: "€ 8,00", desc: "Pollo impanato, stracciatella, insalata, salsa cesar, bacon" },
+            { cat: "Burger", nome: "TARANTARSIA", prezzo: "€ 7,00", desc: "Salsiccia, friggitelli, caciocavallo, cipolla piastrata, maio pepe nero" },
+            { cat: "Burger", nome: "MAMMA CHE CRISPY", prezzo: "€ 8,00", desc: "Scottona 200g, cheddar, bacon, salsa burger, insalata" },
+            { cat: "Burger", nome: "CROCCANTE", prezzo: "€ 10,00", desc: "Scottona 200g, crema cacio e pepe, patatine chips, bacon" },
+            { cat: "Burger", nome: "BIG CALABRIA", prezzo: "€ 13,00", desc: "Scottona 200g, salsiccia 200g, caciocavallo, cheddar, bacon, patatine" },
+            { cat: "Burger", nome: "SMASH BURGER", prezzo: "€ 8,00", desc: "Doppio hamburger da 100g, insalata, salsa burger, bacon" },
+            { cat: "Burger", nome: "PULLED PORK", prezzo: "€ 10,00", desc: "Pulled pork, caciocavallo, cipolla, crema e granella di pistacchio" },
+            { cat: "Burger", nome: "SPICY BY THE TIME", prezzo: "€ 8,00", desc: "Scottona 200g, cheddar, bacon, cipolla, peperoncino, maio al pepe nero" },
+            { cat: "Burger", nome: "CHEESE", prezzo: "€ 8,50", desc: "Smash, formaggio fuso, insalata, caciocavallo, corn flakes, maio al pomodoro" },
+            { cat: "Piadine", nome: "BOMBA", prezzo: "€ 12,00", desc: "Pulled pork, hamburger, insalata, caciocavallo, patatine, bacon" },
+            { cat: "Piadine", nome: "KEBAB", prezzo: "€ 6,00", desc: "Kebab, salsa yogurt, insalata, cipolla, pomodoro, piccante" },
+            { cat: "Piadine", nome: "MILANO", prezzo: "€ 8,00", desc: "Straccetti di pollo panati, salsa cesar, bacon, caciocavallo, maionese" },
             { cat: "Bao", nome: "BAO 101", prezzo: "€ 4,00", desc: "Pollo panato nel panko, insalata, salsa chili" },
             { cat: "Bao", nome: "BAO 102", prezzo: "€ 4,00", desc: "Pulled pork, caciocavallo, crema di pistacchio" },
-            { cat: "Friggitoria", nome: "DIPPERS", prezzo: "€ 4,00", desc: "Patatine con buccia" },
-            { cat: "Dolci", nome: "BUBBLE WAFFLE", prezzo: "€ 4,00", desc: "Gelato e granella a scelta" }
+            { cat: "Special", nome: "CALABROSMASH", prezzo: "€ 9,00", desc: "Smash, caciocavallo, bacon, cipolla caramellata, maio all'nduja" },
+            { cat: "Special", nome: "PANINI CINESI", prezzo: "€ 2,50", desc: "3 pezzi con salsa a scelta (latte cond., Nutella, pistacchio)" },
+            { cat: "Friggitoria", nome: "PATATINE FRITTE", prezzo: "€ 2,50-4,00", desc: "Piccolo, Medio, Grande" },
+            { cat: "Friggitoria", nome: "DIPPERS", prezzo: "€ 4,00-4,50", desc: "Cheddar/bacon, Cacio e pepe, Pistacchio/mortadella" },
+            { cat: "Friggitoria", nome: "ALETTE/BOX/BANDIDOS", prezzo: "€ 4,00-5,00", desc: "Varie specialità fritte" },
+            { cat: "Dolci", nome: "YOGURT/CREPES/PANCAKE/WAFFLE", prezzo: "€ 1,00-5,00", desc: "Ogni dolce include due gusti e granella" }
         ];
 
-        const categorie = ["Tris di Polpette", "Taglieri", "Burger", "Special", "Bao", "Friggitoria", "Dolci"];
-        const container = document.getElementById('menu-container');
+        const container = document.getElementById('menu');
+        const categories = [...new Set(menuData.map(item => item.cat))];
 
-        categorie.forEach(c => {
-            container.innerHTML += `<h2>${c}</h2><div class="grid" id="${c.replace(/ /g, '_')}"></div>`;
-            menu.filter(i => i.cat === c).forEach(i => {
-                document.getElementById(c.replace(/ /g, '_')).innerHTML += `
+        categories.forEach(cat => {
+            container.innerHTML += `<h2>${cat}</h2><div class="grid" id="${cat}"></div>`;
+            menuData.filter(i => i.cat === cat).forEach(i => {
+                document.getElementById(cat).innerHTML += `
                     <div class="card">
                         <div class="nome">${i.nome}</div>
                         <div class="prezzo">${i.prezzo}</div>
@@ -53,8 +61,6 @@
                     </div>`;
             });
         });
-
-        document.getElementById('btn-play').onclick = () => alert("La ruota gira...");
     </script>
 </body>
 </html>
