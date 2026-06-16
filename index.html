@@ -5,53 +5,32 @@
     <title>Mamma Ho Fame</title>
     <style>
         body { background: #1a1a1a; color: #ff9800; font-family: sans-serif; text-align: center; padding: 20px; }
-        .header img { width: 50px; display: block; margin: 0 auto; }
-        h1 { margin: 10px 0; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; max-width: 1000px; margin: 20px auto; }
-        .card { background: #262626; padding: 15px; border-radius: 10px; border: 1px solid #ff9800; }
-        button { background: #ff9800; border: none; padding: 15px 30px; border-radius: 20px; color: white; font-weight: bold; cursor: pointer; }
+        h1 { color: #fff; margin-bottom: 20px; }
+        h2 { color: #ff9800; border-bottom: 1px solid #ff9800; display: inline-block; margin-top: 30px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; max-width: 900px; margin: 20px auto; }
+        .card { background: #262626; padding: 15px; border-radius: 10px; border: 1px solid #444; }
     </style>
 </head>
 <body>
-    <div class="header">
-        <img src="https://img.icons8.com/color/96/dog-footprint.png" alt="Pongo">
-        <h1>MAMMA HO FAME</h1>
-    </div>
-
-    <div id="menu-display"></div>
-
-    <div style="margin: 50px 0;">
-        <h2>Tenta la Fortuna</h2>
-        <button onclick="giraRuota()">Gira la ruota!</button>
-        <p id="risultato" style="font-size: 1.5em;"></p>
-    </div>
+    <h1>MAMMA HO FAME</h1>
+    <div id="menu-container"></div>
 
     <script>
-        let menuData = JSON.parse(localStorage.getItem('menu')) || [
+        const menu = [
             { cat: "Tris di Polpette", nome: "Polpette Classiche", prezzo: "€5,00", desc: "Vitello, maiale, melanzane e pollo" },
-            { cat: "Burger", nome: "MAMMA ROSA", prezzo: "€6,00", desc: "Hamburger 200g, cheddar, insalata" }
+            { cat: "Burger", nome: "MAMMA ROSA", prezzo: "€6,00", desc: "Hamburger 200g, cheddar, insalata" },
+            { cat: "Burger", nome: "SMASH BURGER", prezzo: "€8,00", desc: "Doppio hamburger 100g, bacon" },
+            { cat: "Friggitoria", nome: "DIPPERS", prezzo: "€4,00", desc: "Patatine con buccia" }
         ];
 
-        function visualizzaMenu() {
-            const container = document.getElementById('menu-display');
-            container.innerHTML = "";
-            const categorie = [...new Set(menuData.map(item => item.cat))];
-            categorie.forEach(cat => {
-                container.innerHTML += `<h2>${cat}</h2><div class="grid" id="${cat}"></div>`;
-                menuData.filter(i => i.cat === cat).forEach(i => {
-                    document.getElementById(cat).innerHTML += `<div class="card"><h3>${i.nome}</h3><p>${i.prezzo}</p><p>${i.desc}</p></div>`;
-                });
+        const container = document.getElementById('menu-container');
+        const cats = [...new Set(menu.map(i => i.cat))];
+        cats.forEach(c => {
+            container.innerHTML += `<h2>${c}</h2><div class="grid" id="${c}"></div>`;
+            menu.filter(i => i.cat === c).forEach(i => {
+                document.getElementById(c).innerHTML += `<div class="card"><h3>${i.nome}</h3><p>${i.prezzo}</p><p>${i.desc}</p></div>`;
             });
-        }
-
-        function giraRuota() {
-            const rand = Math.random();
-            if (rand < 0.5) document.getElementById('risultato').innerText = "Ritenta!";
-            else if (rand < 0.75) document.getElementById('risultato').innerText = "Hai vinto una bibita!";
-            else document.getElementById('risultato').innerText = "Hai vinto un panino!";
-        }
-
-        visualizzaMenu();
+        });
     </script>
 </body>
 </html>
